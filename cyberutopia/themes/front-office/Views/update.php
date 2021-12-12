@@ -48,9 +48,9 @@
             header('Location:profile-details.php');
         }     
         else
-            $error = "Veuillez remplir tous les champs";
+            $error ='<p><div class="alert alert-warning alert-common" role="alert"><i class="tf-ion-alert-circled"></i><span>Erreur!</span> Veuillez remplir tous les champs</div></p>';
     }
-       
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -116,9 +116,8 @@
 				$utilisateur = $utilisateurC->recupererutilisateur($_POST['idutilisateur']); 
    
 	   	?>
-          <form class="text-left clearfix" action="" method="POST" name="form1"> <!-- à vérifier le javascript -->
+          <form class="text-left clearfix" action="" method="POST" name="form1" onsubmit="return verif_formulaire(event)"> 
           
-          <!--     <form class="text-left clearfix" action="" method="POST" name="form1" onsubmit="return verif_formulaire(event)">    -->
 
                   <!--Des input cachées pour stoker les autres attributs de l'utilisateur -->
   <input type="hidden" name="id_util" value="<?php echo $utilisateur['IdUtilisateur']; ?>">
@@ -216,7 +215,7 @@
     <script src="../js/script.js"></script>
     
  <!-- pour le controle de saisie -->
- <script src="../js/update.js"></script>
+ <script src="../js/update1.js"></script>
  
 
   </body>

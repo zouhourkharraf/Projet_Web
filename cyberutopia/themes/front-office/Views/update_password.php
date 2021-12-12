@@ -1,50 +1,5 @@
-<?php
-session_start();
-
-$id_utilisateur=$_SESSION['id'];
-
-include_once '..\Model\Utilisateur.php';
-include_once '..\Controller\UtilisateurC.php';
-
-$error = "";
-
-// créer un utilisateur
-$utilisateur = null;
-
-// create an instance of the controller
-$utilisateurC = new UtilisateurC();
-
-if (isset($_POST["new_password1"]) && isset($_POST["new_password2"]) ) 
-{
-    if (!empty($_POST["new_password1"]) &&  !empty($_POST['new_password2'])  ) 
-    {   
-        $utilisateur = $utilisateurC->recupererutilisateur( $id_utilisateur );   
-
-        $utilisateur = new Utilisateur(
-            $utilisateur['IdUtilisateur'],
-            $utilisateur['NomUtilisateur'],
-            $utilisateur['PrenomUtilisateur'],
-            $utilisateur['PseudoUtilisateur'],
-            $utilisateur['AdresseUtilisateur'],
-            $utilisateur['Tel1Utilisateur'],
-            $utilisateur['Tel2Utilisateur'],
-            $utilisateur['GenreUtilisateur'],
-            $utilisateur['DatenaissUtilisateur'],
-            $utilisateur['EmailUtilisateur'],
-             $_POST['new_password2'] ,
-             $utilisateur['RoleUtilisateur']
-        );
-        
-        $utilisateurC->modifierutilisateur($utilisateur, $id_utilisateur );
-        header('Location:login.php');
-    }     
-   
-}
 
 
-
-
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -89,14 +44,17 @@ if (isset($_POST["new_password1"]) && isset($_POST["new_password2"]) )
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <div class="block text-center">
-          <a class="logo" href="">
+          <a class="logo" href="index.html">
             <img src="images/photo_logo.png" alt="" width="135" height="135">
           </a>
           <h2 class="text-center">Modifier le mot de passe de votre compte</h2>
 
-          <form class="text-left clearfix" action="" method="post" onsubmit="return verif_formulaire(event)" name="form1">
+          <form class="text-left clearfix" action="index.html" method="post" onsubmit="return verif_formulaire(event)" name="form1">
 
-     
+            <div class="form-group">
+              <p id="erreur1"></p>
+              <input type="password" class="form-control"  placeholder="L'ancien mot de passe" name="old_password">
+            </div>
 
             <div class="form-group">
               <p id="erreur2"></p>
@@ -151,7 +109,7 @@ if (isset($_POST["new_password1"]) && isset($_POST["new_password2"]) )
     <script src="js/script.js"></script>
     
     <!-- pour le controle de saisie -->
-    <script src="../js/update_password.js"></script>
+    <script src="js/update_password.js"></script>
    
 
   </body>

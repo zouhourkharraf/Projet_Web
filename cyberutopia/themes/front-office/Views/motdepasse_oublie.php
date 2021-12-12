@@ -15,12 +15,14 @@ $utilisateurC=new UtilisateurC();
 
 if(isset($_POST["mail"])&& (!empty($_POST["mail"])) ) 
 {
-    $utilisateur= $utilisateurC->recupererutilisateur_via_email($_POST["mail"]);
+    $utilisateur= $utilisateurC->recupererutilisateur_via_email($_POST["mail"]); //récupérer l'utilisateur qui possède cet adresse mail 
+    
        if($utilisateur!=null) // si cet utilisateur existe dans la base de donnée
-       {  $email_util=$utilisateur['EmailUtilisateur'];  // stocker l'email de l'utilisateur pour l'envoyer un mail à cet adresse
+       { 
+          $email_util=$utilisateur['EmailUtilisateur'];  // stocker l'email de l'utilisateur pour l'envoyer un mail à cet adresse
          $code_de_verification=1000+$utilisateur['IdUtilisateur']; // le code de vérification sera toujours =(1000+l'identifiant) de l'utilisateur et puisque L'Id est unique donc le code sera toujours unique
-         $_SESSION['code']=$code_de_verification; //--> stocker le code de vérification envoyé 
-         $_SESSION['id']=$utilisateur['IdUtilisateur'];  // stocker l'Id de l'utilisateur
+         $_SESSION['code']=$code_de_verification; //--> stocker le code de vérification envoyé dans la variable $_SESSION  pour qu'on puisse l'utiliser dans la page suivante
+         $_SESSION['id']=$utilisateur['IdUtilisateur'];  // stocker l'Id de l'utilisateur dans la variable $_SESSION  pour qu'on puisse l'utiliser dans la page suivante
 
          //L'envoie du mail à l'utilisateur :
          $destinataire=$email_util;
@@ -37,6 +39,10 @@ if(isset($_POST["mail"])&& (!empty($_POST["mail"])) )
      header('Location:valider_code.php');
    
 
+     }
+     else
+     {
+      $erreur='<p><div class="alert alert-danger alert-common" role="alert"><i class="tf-ion-close-circled"></i>Cette adresse n\'existe pas</div></p>';
      }
 
 }

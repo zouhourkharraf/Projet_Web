@@ -118,7 +118,7 @@
    
 	   	?>
 
-          <form class="text-left clearfix" action="" method="POST" name="form1" onsubmit="return verif_formulaire(event)"> <!-- à vérifier le javascript -->
+          <form class="text-left clearfix" action="" method="POST" name="form1" onsubmit="return verif_formulaire(event)"> 
           
      
 
@@ -218,7 +218,7 @@
     <script src="../js/script.js"></script>
     
  <!-- pour le controle de saisie -->
- <script src="../js/update.js"></script>
+ <script src="../js/update2.js"></script>
 
   </body>
   </html>
